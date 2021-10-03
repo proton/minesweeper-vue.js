@@ -1,5 +1,5 @@
 <template>
-  <div class="cell" :class="classes()"></div>
+  <div class="cell" :class="classes()" v-on:click="onClick"></div>
 </template>
 
 <script>
@@ -9,7 +9,9 @@ export default {
     x: Number,
     y: Number,
     cell: Object,
+    gameOver: Boolean,
   },
+  emits: ['clicked'],
   methods: {
     classes() {
       let h = {}
@@ -20,7 +22,10 @@ export default {
         if (this.cell.n) h[`cell-${this.cell.n}`] = true
       }
       return h
-    }
+    },
+    onClick() {
+      this.$emit('clicked', {x: this.x, y: this.y})
+    },
   }
 }
 </script>
@@ -46,34 +51,34 @@ export default {
   .cell:before {
     content: ' ';
   }
-  .cell.cell-error {
+  .cell.cell-visible.cell-error {
     background: red;
   }
-  .cell.cell-bomb:before {
+  .cell.cell-visible.cell-bomb:before {
     content: '💣';
   }
-  .cell.cell-1:before {
+  .cell.cell-visible.cell-1:before {
     content: '1';
   }
-  .cell.cell-2:before {
+  .cell.cell-visible.cell-2:before {
     content: '2';
   }
-  .cell.cell-3:before {
+  .cell.cell-visible.cell-3:before {
     content: '3';
   }
-  .cell.cell-4:before {
+  .cell.cell-visible.cell-4:before {
     content: '4';
   }
-  .cell.cell-5:before {
+  .cell.cell-visible.cell-5:before {
     content: '5';
   }
-  .cell.cell-6:before {
+  .cell.cell-visible.cell-6:before {
     content: '6';
   }
-  .cell.cell-7:before {
+  .cell.cell-visible.cell-7:before {
     content: '7';
   }
-  .cell.cell-8:before {
+  .cell.cell-visible.cell-8:before {
     content: '8';
   }
 </style>

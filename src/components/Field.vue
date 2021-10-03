@@ -2,16 +2,16 @@
   <div class="field">
     <div v-for="y in field.length" :key="y" class="row">
       <span v-for="x in field[0].length" :key="x">
-        <Tile :x="x" :y="y" :cell="field[y-1][x-1]" />
+        <Cell :x="x-1" :y="y-1" :cell="field[y-1][x-1]" @clicked="onCellClicked" />
       </span>
     </div>
   </div>
 </template>
 
 <script>
-import Tile from './Cell.vue'
+import Cell from './Cell.vue'
 export default {
-  components: { Tile },
+  components: { Cell },
   name: 'Field',
   props: {
     width: Number,
@@ -26,7 +26,7 @@ export default {
           this.field[y][x] = {
             bomb: false,
             n: undefined,
-            visible: true,
+            visible: false,
             error: false,
           }
         }
@@ -58,11 +58,30 @@ export default {
     },
     hasBomb(y, x) {
       return this.field[y] && this.field[y][x] && this.field[y][x].bomb
+    },
+    onCellClicked (data) {
+      if (this.gameOver) return
+
+      let cell = this.field[data.y][data.x]
+      cell.visible = true
+      if (cell.bomb) {
+        cell.error = true
+        this.makeAllCellsVisible()
+      }
+      // console.log(cell) // someValue
+    },
+    makeAllCellsVisible() {
+      for (const row of this.field) {
+        for (const cell of row) {
+          cell.visible = true
+        }
+      }
     }
   },
   data() {
     return {
-      field: new Array(this.height)
+      field: new Array(this.height),
+      gameOver: false,
     }
   },
   beforeMount() {
