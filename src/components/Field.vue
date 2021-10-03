@@ -1,6 +1,6 @@
 <template>
   <div class="field">
-    <div v-for="y in field.length" :key="y" style="padding:0;margin:0;">
+    <div v-for="y in field.length" :key="y" class="row">
       <span v-for="x in field[0].length" :key="x">
         <Tile :x="x" :y="y" :cell="field[y-1][x-1]" />
       </span>
@@ -22,7 +22,7 @@ export default {
     generateField() {
       for (let y = 0; y < this.height; ++y) {
         this.field[y] = []
-        for (let x = 0; x < this.height; ++x) {
+        for (let x = 0; x < this.width; ++x) {
           this.field[y][x] = {
             bomb: false,
             n: undefined,
@@ -44,10 +44,10 @@ export default {
   },
   data() {
     return {
-      field: []
+      field: new Array(this.height)
     }
   },
-  mounted() {
+  beforeMount() {
     this.generateField()
   },
 }
@@ -56,5 +56,8 @@ export default {
 <style scoped>
   .field {
     /* border: 1px black solid; */
+  }
+  .row {
+    height: 40px;
   }
 </style>

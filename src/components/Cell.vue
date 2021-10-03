@@ -40,6 +40,7 @@ export default {
     /* background: red; */
     /* border-radius: 3px; */
     cursor: pointer;
+    overflow: hidden;
   }
   .cell.cell-visible {
     cursor: default;
