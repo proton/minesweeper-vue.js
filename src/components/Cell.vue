@@ -18,6 +18,7 @@ export default {
       if (this.cell) {
         if (this.cell.bomb) h['cell-bomb'] = true
         if (this.cell.error) h['cell-error'] = true
+        if (this.cell.visible) h['cell-visible'] = true
         if (this.cell.n) h[`cell-${this.cell.n}`] = true
       }
       return h
@@ -39,6 +40,9 @@ export default {
     /* background: red; */
     /* border-radius: 3px; */
     cursor: pointer;
+  }
+  .cell.cell-visible {
+    cursor: default;
   }
   .cell:before {
     content: ' ';
