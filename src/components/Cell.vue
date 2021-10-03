@@ -1,7 +1,5 @@
 <template>
-  <div class="cell" :class="classes()">
-    <!-- {{ cell }} -->
-  </div>
+  <div class="cell" :class="classes()"></div>
 </template>
 
 <script>

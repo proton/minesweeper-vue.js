@@ -40,6 +40,24 @@ export default {
         this.field[y][x].bomb = true
         --n
       }
+      // place numbers
+      for (let y = 0; y < this.height; ++y)
+      for (let x = 0; x < this.width; ++x) {
+        if (this.field[y][x].bomb) continue
+        let cnt = 0
+        if (this.hasBomb(y - 1, x - 1)) ++cnt
+        if (this.hasBomb(y - 1, x    )) ++cnt
+        if (this.hasBomb(y - 1, x + 1)) ++cnt
+        if (this.hasBomb(y    , x - 1)) ++cnt
+        if (this.hasBomb(y    , x + 1)) ++cnt
+        if (this.hasBomb(y + 1, x - 1)) ++cnt
+        if (this.hasBomb(y + 1, x    )) ++cnt
+        if (this.hasBomb(y + 1, x + 1)) ++cnt
+        this.field[y][x].n = cnt
+      }
+    },
+    hasBomb(y, x) {
+      return this.field[y] && this.field[y][x] && this.field[y][x].bomb
     }
   },
   data() {
