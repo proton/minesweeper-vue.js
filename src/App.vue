@@ -1,5 +1,13 @@
 <template>
-  <Field :width="20" :height="10" :minesCount="70" />
+  <Field :width="width" :height="height" :minesCount="minesCount" />
+  <br/>
+  <div>
+    Size: 
+    <input type="number" v-model="width"> x 
+    <input type="number" v-model="height">
+    Mines:
+    <input type="number" v-model="minesCount">
+  </div>
 </template>
 
 <script>
@@ -9,6 +17,13 @@ export default {
   name: 'App',
   components: {
     Field
+  },
+  data() {
+    return {
+      width: 20,
+      height: 10,
+      minesCount: 70,
+    }
   }
 }
 </script>

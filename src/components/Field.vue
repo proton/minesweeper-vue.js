@@ -110,9 +110,6 @@ export default {
 </script>
 
 <style scoped>
-  .field {
-    /* border: 1px black solid; */
-  }
   .row {
     height: 40px;
   }
