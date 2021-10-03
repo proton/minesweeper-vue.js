@@ -44,4 +44,12 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+.props {
+  font-size: 24px;
+}
+.props input {
+  font-size: 24px;
+  width: 50px;
+}
 </style>
