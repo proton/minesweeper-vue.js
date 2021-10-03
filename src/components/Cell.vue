@@ -44,9 +44,11 @@ export default {
     /* border-radius: 3px; */
     cursor: pointer;
     overflow: hidden;
+    background: #eeeeee;
   }
   .cell.cell-visible {
     cursor: default;
+    background: white;
   }
   .cell:before {
     content: ' ';

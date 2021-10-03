@@ -2,7 +2,7 @@
   <div class="field">
     <div v-for="y in field.length" :key="y" class="row">
       <span v-for="x in field[0].length" :key="x">
-        <Cell :x="x-1" :y="y-1" :cell="field[y-1][x-1]" @clicked="onCellClicked" />
+        <Cell :x="x-1" :y="y-1" :cell="field[y-1][x-1]" @clicked="revealCell" />
       </span>
     </div>
   </div>
@@ -59,16 +59,26 @@ export default {
     hasBomb(y, x) {
       return this.field[y] && this.field[y][x] && this.field[y][x].bomb
     },
-    onCellClicked (data) {
-      if (this.gameOver) return
+    revealCell(data) {
+      let cell = this.field[data.y] && this.field[data.y][data.x]
+      if (!cell) return
+      if (cell.visible) return
 
-      let cell = this.field[data.y][data.x]
       cell.visible = true
       if (cell.bomb) {
         cell.error = true
         this.makeAllCellsVisible()
       }
-      // console.log(cell) // someValue
+      else if (cell.n === 0) {
+        this.revealCell({x: data.x - 1, y: data.y - 1})
+        this.revealCell({x: data.x - 1, y: data.y    })
+        this.revealCell({x: data.x - 1, y: data.y + 1})
+        this.revealCell({x: data.x,     y: data.y - 1})
+        this.revealCell({x: data.x,     y: data.y + 1})
+        this.revealCell({x: data.x + 1, y: data.y - 1})
+        this.revealCell({x: data.x + 1, y: data.y    })
+        this.revealCell({x: data.x + 1, y: data.y + 1})
+      }
     },
     makeAllCellsVisible() {
       for (const row of this.field) {
