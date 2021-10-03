@@ -1,5 +1,5 @@
 <template>
-  <Field :width="20" :height="10" />
+  <Field :width="20" :height="10" :minesCount="20" />
 </template>
 
 <script>
