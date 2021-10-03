@@ -31,6 +31,14 @@ export default {
     superKey: function() {
       return this.width + '.' + this.height + '.' + this.minesCount;
     }
+  },
+  watch: {
+    width: function () {
+      if (this.minesCount > this.width * this.height) this.minesCount = this.width * this.height
+    },
+    height: function () {
+      if (this.minesCount > this.width * this.height) this.minesCount = this.width * this.height
+    }
   }
 }
 </script>
