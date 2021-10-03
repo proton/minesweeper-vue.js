@@ -1,5 +1,5 @@
 <template>
-  <div class="cell" :class="classes()" v-on:click="onClick"></div>
+  <div class="cell" :class="classes()" @click="onClick" @contextmenu.prevent="onRightClick"></div>
 </template>
 
 <script>
@@ -11,7 +11,7 @@ export default {
     cell: Object,
     gameOver: Boolean,
   },
-  emits: ['clicked'],
+  emits: ['clicked', 'rightClicked'],
   methods: {
     classes() {
       let h = {}
@@ -19,12 +19,16 @@ export default {
         if (this.cell.bomb) h['cell-bomb'] = true
         if (this.cell.error) h['cell-error'] = true
         if (this.cell.visible) h['cell-visible'] = true
+        if (this.cell.flag) h['cell-flag'] = true
         if (this.cell.n) h[`cell-${this.cell.n}`] = true
       }
       return h
     },
     onClick() {
       this.$emit('clicked', {x: this.x, y: this.y})
+    },
+    onRightClick() {
+      this.$emit('rightClicked', {x: this.x, y: this.y})
     },
   }
 }
@@ -45,6 +49,12 @@ export default {
     cursor: pointer;
     overflow: hidden;
     background: #eeeeee;
+  }
+  .cell.cell-flag {
+    cursor: default;
+  }
+  .cell.cell-flag:before {
+    content: '🚩';
   }
   .cell.cell-visible {
     cursor: default;

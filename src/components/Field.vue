@@ -2,7 +2,7 @@
   <div class="field">
     <div v-for="y in field.length" :key="y" class="row">
       <span v-for="x in field[0].length" :key="x">
-        <Cell :x="x-1" :y="y-1" :cell="field[y-1][x-1]" @clicked="revealCell" />
+        <Cell :x="x-1" :y="y-1" :cell="field[y-1][x-1]" @clicked="revealCell" @rightClicked="toggleFlag" />
       </span>
     </div>
   </div>
@@ -28,6 +28,7 @@ export default {
             n: undefined,
             visible: false,
             error: false,
+            flag: false,
           }
         }
       }
@@ -63,6 +64,7 @@ export default {
       let cell = this.field[data.y] && this.field[data.y][data.x]
       if (!cell) return
       if (cell.visible) return
+      if (cell.flag) return
 
       cell.visible = true
       if (cell.bomb) {
@@ -79,6 +81,13 @@ export default {
         this.revealCell({x: data.x + 1, y: data.y    })
         this.revealCell({x: data.x + 1, y: data.y + 1})
       }
+    },
+    toggleFlag(data) {
+      let cell = this.field[data.y] && this.field[data.y][data.x]
+      if (!cell) return
+      if (cell.visible) return
+
+      cell.flag = !cell.flag
     },
     makeAllCellsVisible() {
       for (const row of this.field) {
