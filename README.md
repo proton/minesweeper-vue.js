@@ -1,4 +1,6 @@
-# minesweeper-vue.js
+# Minesweeper on Vue.js
+
+![screenshot](https://github.com/proton/minesweeper-vue.js/blob/master/screenshot.png?raw=true)
 
 ## Project setup
 ```
