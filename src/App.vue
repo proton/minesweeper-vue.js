@@ -6,8 +6,11 @@
       Size: 
       <input type="number" v-model="width"> x 
       <input type="number" v-model="height">
+      &nbsp;&nbsp;&nbsp;
       Mines:
       <input type="number" v-model="minesCount">
+      &nbsp;&nbsp;&nbsp;
+      <button class="refresh" @click="it += 1">🔄</button>
     </div>
   </div>
 </template>
@@ -25,11 +28,12 @@ export default {
       width: 20,
       height: 10,
       minesCount: 50,
+      it: 0,
     }
   },
   computed: {
     superKey: function() {
-      return this.width + '.' + this.height + '.' + this.minesCount;
+      return this.width + '.' + this.height + '.' + this.minesCount + '.' + this.it;
     }
   },
   watch: {
@@ -59,5 +63,8 @@ export default {
 .props input {
   font-size: 24px;
   width: 50px;
+}
+.refresh {
+  font-size: 24px;
 }
 </style>
