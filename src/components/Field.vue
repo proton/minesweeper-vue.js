@@ -23,13 +23,15 @@ export default {
       for (let y = 0; y < this.height; ++y) {
         this.field[y] = []
         for (let x = 0; x < this.width; ++x) {
-          this.field[y][x] = {
+          const cell = {
             bomb: false,
             n: undefined,
             visible: false,
             error: false,
             flag: false,
           }
+          this.field[y][x] = cell
+          this.cells.push(cell)
         }
       }
       // place mines
@@ -90,16 +92,15 @@ export default {
       cell.flag = !cell.flag
     },
     makeAllCellsVisible() {
-      for (const row of this.field) {
-        for (const cell of row) {
-          cell.visible = true
-        }
+      for (const cell of this.cells) {
+        cell.visible = true
       }
-    }
+    },
   },
   data() {
     return {
       field: new Array(this.height),
+      cells: [],
       gameOver: false,
     }
   },
