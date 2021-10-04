@@ -28,6 +28,7 @@ export default {
             n: undefined,
             visible: false,
             error: false,
+            success: false,
             flag: false,
           }
           this.field[y][x] = cell
@@ -83,6 +84,7 @@ export default {
         this.revealCell({x: data.x + 1, y: data.y    })
         this.revealCell({x: data.x + 1, y: data.y + 1})
       }
+      this.checkWin()
     },
     toggleFlag(data) {
       let cell = this.field[data.y] && this.field[data.y][data.x]
@@ -90,12 +92,25 @@ export default {
       if (cell.visible) return
 
       cell.flag = !cell.flag
+      this.checkWin()
     },
     makeAllCellsVisible() {
       for (const cell of this.cells) {
         cell.visible = true
+        if (cell.flag) {
+          if (cell.bomb) cell.success = true
+          else cell.error = true
+        }
       }
     },
+    checkWin() {
+      const allBombCellsFlagged = this.cells.filter(cell => cell.bomb).every(cell => cell.flag)
+      const allFlagCellsBombed = this.cells.filter(cell => cell.flag).every(cell => cell.bomb)
+      if (allBombCellsFlagged && allFlagCellsBombed) {
+        this.makeAllCellsVisible()
+        alert('Win!')
+      }
+    }
   },
   data() {
     return {

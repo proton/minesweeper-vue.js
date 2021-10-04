@@ -20,6 +20,7 @@ export default {
         if (this.cell.error) h['cell-error'] = true
         if (this.cell.visible) h['cell-visible'] = true
         if (this.cell.flag) h['cell-flag'] = true
+        if (this.cell.success) h['cell-success'] = true
         if (this.cell.n) h[`cell-${this.cell.n}`] = true
       }
       return h
@@ -65,6 +66,9 @@ export default {
   }
   .cell.cell-visible.cell-error {
     background: red;
+  }
+  .cell.cell-visible.cell-success {
+    background: green;
   }
   .cell.cell-visible.cell-bomb:before {
     content: '💣';
