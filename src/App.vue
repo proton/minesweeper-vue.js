@@ -42,7 +42,10 @@ export default {
     },
     height: function () {
       if (this.minesCount > this.width * this.height) this.minesCount = this.width * this.height
-    }
+    },
+    minesCount: function () {
+      if (this.minesCount < 1) this.minesCount = 1
+    },
   }
 }
 </script>
