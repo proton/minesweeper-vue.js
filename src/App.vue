@@ -10,7 +10,7 @@
       Mines:
       <input type="number" v-model="minesCount">
       &nbsp;&nbsp;&nbsp;
-      <button class="refresh" @click="it += 1">🔄</button>
+      <button class="refresh" @click="it += 1">Restart</button>
     </div>
   </div>
 </template>
