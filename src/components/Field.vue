@@ -38,10 +38,9 @@ export default {
       // place mines
       let n = this.minesCount
       while (n > 0) {
-        let y = Math.floor(Math.random() * this.height)
-        let x = Math.floor(Math.random() * this.width)
-        if (this.field[y][x].bomb) continue
-        this.field[y][x].bomb = true
+        const cellsWithoutBombs = this.cells.filter(c => !c.bomb)
+        let i = Math.floor(Math.random() * cellsWithoutBombs.length)
+        cellsWithoutBombs[i].bomb = true
         --n
       }
       // place numbers

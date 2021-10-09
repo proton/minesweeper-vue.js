@@ -8,7 +8,7 @@
       <input type="number" v-model="height">
       &nbsp;&nbsp;&nbsp;
       Mines:
-      <input type="number" v-model="minesCount">
+      <input type="number" v-model="minesCount" min=1 :max="width * height">
       &nbsp;&nbsp;&nbsp;
       <button class="refresh" @click="it += 1">Restart</button>
     </div>
@@ -36,15 +36,21 @@ export default {
       return this.width + '.' + this.height + '.' + this.minesCount + '.' + this.it;
     }
   },
+  methods: {
+    fixMinesCount() {
+      if (this.minesCount < 1) this.minesCount = 1
+      else if (this.minesCount > this.width * this.height) this.minesCount = this.width * this.height
+    }
+  },
   watch: {
     width: function () {
-      if (this.minesCount > this.width * this.height) this.minesCount = this.width * this.height
+      this.fixMinesCount()
     },
     height: function () {
-      if (this.minesCount > this.width * this.height) this.minesCount = this.width * this.height
+      this.fixMinesCount()
     },
     minesCount: function () {
-      if (this.minesCount < 1) this.minesCount = 1
+      this.fixMinesCount()
     },
   }
 }
