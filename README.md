@@ -2,6 +2,8 @@
 
 ![screenshot](https://github.com/proton/minesweeper-vue.js/blob/master/screenshot.png?raw=true)
 
+Demo: https://minesweeper.proton.name
+
 ## Project setup
 ```
 npm install
