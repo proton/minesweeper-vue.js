@@ -45,8 +45,6 @@ export default {
     font-size: 40px;
     padding: 0;
     margin: 0;
-    /* background: red; */
-    /* border-radius: 3px; */
     cursor: pointer;
     overflow: hidden;
     background: #eeeeee;
@@ -63,6 +61,8 @@ export default {
   }
   .cell:before {
     content: ' ';
+    font-size: 32px;
+    vertical-align: top;
   }
   .cell.cell-visible.cell-error {
     background: red;
